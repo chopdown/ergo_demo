@@ -1,8 +1,6 @@
 package myapp
 
 import (
-	"fmt"
-
 	"ergo.services/ergo/act"
 	"ergo.services/ergo/gen"
 )
@@ -18,7 +16,8 @@ type Actor1 struct {
 // Init invoked on a start this process.
 func (a *Actor1) Init(args ...any) error {
 	a.Log().Info("started process with name %s and args %v", a.Name(), args)
-	a.Send(a.PID(), gen.Atom("hello"))
+
+	//a.Send(a.PID(), gen.Atom("hello"))
 	return nil
 }
 
@@ -32,7 +31,7 @@ func (a *Actor1) Init(args ...any) error {
 // or any other for abnormal termination.
 func (a *Actor1) HandleMessage(from gen.PID, message any) error {
 	a.Log().Info("got message from %s", from)
-	return fmt.Errorf("not implemented")
+	return nil
 }
 
 // HandleCall invoked if Actor got a synchronous request made with gen.Process.Call(...).
@@ -45,7 +44,7 @@ func (a *Actor1) HandleCall(from gen.PID, ref gen.Ref, request any) (any, error)
 
 // Terminate invoked on a termination process
 func (a *Actor1) Terminate(reason error) {
-	a.Log().Info("terminated with reason: %s", reason)
+	a.Log().Info("terminated Actor1 with reason: %s", reason)
 }
 
 // HandleMessageName invoked if split handling was enabled using SetSplitHandle(true)

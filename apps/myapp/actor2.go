@@ -16,6 +16,7 @@ type Actor2 struct {
 // Init invoked on a start this process.
 func (a *Actor2) Init(args ...any) error {
 	a.Log().Info("started process with name %s and args %v", a.Name(), args)
+	panic("test panic")
 	return nil
 }
 
@@ -42,7 +43,7 @@ func (a *Actor2) HandleCall(from gen.PID, ref gen.Ref, request any) (any, error)
 
 // Terminate invoked on a termination process
 func (a *Actor2) Terminate(reason error) {
-	a.Log().Info("terminated with reason: %s", reason)
+	a.Log().Info("terminated Actor2 with reason: %s", reason)
 }
 
 // HandleMessageName invoked if split handling was enabled using SetSplitHandle(true)
